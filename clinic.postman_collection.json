@@ -1,0 +1,2240 @@
+{
+  "info": {
+    "name": "Clinic",
+    "description": "Kigali Clinic JPA & JPQL quiz. Restart the app (ddl-auto=create gives an empty database), then run the folders in order: Seed, Part A, Part B, Part C, Bonus.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "2c100c4a-5268-4148-b0ae-e87e808a0f0f"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8083"
+    }
+  ],
+  "item": [
+    {
+      "name": "0 Seed data",
+      "item": [
+        {
+          "name": "Save specialization Cardiology",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/specializations/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "specializations",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Cardiology\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Specialization is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save specialization Pediatrics",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/specializations/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "specializations",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Pediatrics\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Specialization is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save specialization Dermatology",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/specializations/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "specializations",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Dermatology\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Specialization is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save specialization Neurology",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/specializations/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "specializations",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Neurology\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Specialization is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save office 101",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/offices/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "offices",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Cardiology Wing\",\n  \"officeNumber\": 101\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Office is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save office 102",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/offices/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "offices",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Children Wing\",\n  \"officeNumber\": 102\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Office is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save office 103",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/offices/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "offices",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Skin Clinic\",\n  \"officeNumber\": 103\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Office is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Read office ids",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/offices/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "offices",
+                "all"
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const offices = pm.response.json();",
+                  "offices.forEach(o => pm.collectionVariables.set(\"office\" + o.officeNumber + \"Id\", o.id));",
+                  "pm.test(\"3 offices\", () => pm.expect(offices.length).to.eql(3));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save doctor Eric Mugisha (office 101)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/doctors/save?officeId={{office101Id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "doctors",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "officeId",
+                  "value": "{{office101Id}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Eric\",\n  \"lastName\": \"Mugisha\",\n  \"dateOfBirth\": \"1980-03-14\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Doctor is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save doctor Alice Uwimana (office 102)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/doctors/save?officeId={{office102Id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "doctors",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "officeId",
+                  "value": "{{office102Id}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Uwimana\",\n  \"dateOfBirth\": \"1985-07-22\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Doctor is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save doctor Jean Habimana (no office)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/doctors/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "doctors",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Jean\",\n  \"lastName\": \"Habimana\",\n  \"dateOfBirth\": \"1978-11-02\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Doctor is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Read doctor ids",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/doctors/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "doctors",
+                "all"
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const doctors = pm.response.json();",
+                  "doctors.forEach(d => pm.collectionVariables.set(d.lastName.toLowerCase() + \"Id\", d.id));",
+                  "pm.test(\"3 doctors\", () => pm.expect(doctors.length).to.eql(3));",
+                  "pm.test(\"date of birth comes back unchanged\", () => {",
+                  "  const eric = doctors.find(d => d.lastName === \"Mugisha\");",
+                  "  pm.expect(eric.dateOfBirth).to.eql(\"1980-03-14\");",
+                  "});"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Read specialization ids",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/specializations/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "specializations",
+                "all"
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const specs = pm.response.json();",
+                  "specs.forEach(s => pm.collectionVariables.set(s.name.toLowerCase() + \"Id\", s.id));",
+                  "pm.test(\"4 specializations\", () => pm.expect(specs.length).to.eql(4));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Give mugisha cardiology",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/specializations/{{cardiologyId}}/doctor/{{mugishaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "specializations",
+                "{{cardiologyId}}",
+                "doctor",
+                "{{mugishaId}}"
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Doctor is added to specialization successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Give mugisha pediatrics",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/specializations/{{pediatricsId}}/doctor/{{mugishaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "specializations",
+                "{{pediatricsId}}",
+                "doctor",
+                "{{mugishaId}}"
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Doctor is added to specialization successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Give uwimana dermatology",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/specializations/{{dermatologyId}}/doctor/{{uwimanaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "specializations",
+                "{{dermatologyId}}",
+                "doctor",
+                "{{uwimanaId}}"
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Doctor is added to specialization successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Give habimana cardiology",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/specializations/{{cardiologyId}}/doctor/{{habimanaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "specializations",
+                "{{cardiologyId}}",
+                "doctor",
+                "{{habimanaId}}"
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Doctor is added to specialization successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save patient Aline Uwase",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/patients/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "patients",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Aline\",\n  \"lastName\": \"Uwase\",\n  \"dateOfBirth\": \"1995-01-10\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Patient is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save patient Grace Uwase",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/patients/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "patients",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Grace\",\n  \"lastName\": \"Uwase\",\n  \"dateOfBirth\": \"1998-06-05\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Patient is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save patient Kevin Niyonzima",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/patients/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "patients",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Kevin\",\n  \"lastName\": \"Niyonzima\",\n  \"dateOfBirth\": \"2001-09-17\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Patient is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save patient Diane Mukamana",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/patients/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "patients",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Diane\",\n  \"lastName\": \"Mukamana\",\n  \"dateOfBirth\": \"1990-12-01\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Patient is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save patient Patrick Nshuti",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/patients/save",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "patients",
+                "save"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Patrick\",\n  \"lastName\": \"Nshuti\",\n  \"dateOfBirth\": \"2010-04-25\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Patient is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Read patient ids",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/patients/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "patients",
+                "all"
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const patients = pm.response.json();",
+                  "patients.forEach(p => pm.collectionVariables.set(p.firstName.toLowerCase() + \"Id\", p.id));",
+                  "pm.test(\"5 patients\", () => pm.expect(patients.length).to.eql(5));",
+                  "pm.test(\"date of birth comes back unchanged\", () => {",
+                  "  const aline = patients.find(p => p.firstName === \"Aline\");",
+                  "  pm.expect(aline.dateOfBirth).to.eql(\"1995-01-10\");",
+                  "});"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "C3 Busiest office before any appointment",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/offices/busiest",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "offices",
+                "busiest"
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"No appointments yet\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save appointment 1: aline with mugisha on 2026-10-05 (COMPLETED)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments/save?patientId={{alineId}}&doctorId={{mugishaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "appointments",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "patientId",
+                  "value": "{{alineId}}"
+                },
+                {
+                  "key": "doctorId",
+                  "value": "{{mugishaId}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appointmentDate\": \"2026-10-05\",\n  \"reason\": \"Chest pain follow-up\",\n  \"status\": \"COMPLETED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Appointment is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save appointment 2: aline with mugisha on 2026-10-12 (CANCELLED)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments/save?patientId={{alineId}}&doctorId={{mugishaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "appointments",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "patientId",
+                  "value": "{{alineId}}"
+                },
+                {
+                  "key": "doctorId",
+                  "value": "{{mugishaId}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appointmentDate\": \"2026-10-12\",\n  \"reason\": \"Blood pressure check\",\n  \"status\": \"CANCELLED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Appointment is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save appointment 3: grace with uwimana on 2026-10-08 (CANCELLED)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments/save?patientId={{graceId}}&doctorId={{uwimanaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "appointments",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "patientId",
+                  "value": "{{graceId}}"
+                },
+                {
+                  "key": "doctorId",
+                  "value": "{{uwimanaId}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appointmentDate\": \"2026-10-08\",\n  \"reason\": \"Skin rash\",\n  \"status\": \"CANCELLED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Appointment is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save appointment 4: kevin with mugisha on 2026-10-20 (CANCELLED)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments/save?patientId={{kevinId}}&doctorId={{mugishaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "appointments",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "patientId",
+                  "value": "{{kevinId}}"
+                },
+                {
+                  "key": "doctorId",
+                  "value": "{{mugishaId}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appointmentDate\": \"2026-10-20\",\n  \"reason\": \"ECG review\",\n  \"status\": \"CANCELLED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Appointment is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save appointment 5: aline with mugisha on 2026-10-20 (SCHEDULED)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments/save?patientId={{alineId}}&doctorId={{mugishaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "appointments",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "patientId",
+                  "value": "{{alineId}}"
+                },
+                {
+                  "key": "doctorId",
+                  "value": "{{mugishaId}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appointmentDate\": \"2026-10-20\",\n  \"reason\": \"Heart scan\",\n  \"status\": \"SCHEDULED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Appointment is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save appointment 6: grace with uwimana on 2026-10-20 (CONFIRMED)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments/save?patientId={{graceId}}&doctorId={{uwimanaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "appointments",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "patientId",
+                  "value": "{{graceId}}"
+                },
+                {
+                  "key": "doctorId",
+                  "value": "{{uwimanaId}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appointmentDate\": \"2026-10-20\",\n  \"reason\": \"Allergy test\",\n  \"status\": \"CONFIRMED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Appointment is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save appointment 7: kevin with uwimana on 2026-11-03 (SCHEDULED)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments/save?patientId={{kevinId}}&doctorId={{uwimanaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "appointments",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "patientId",
+                  "value": "{{kevinId}}"
+                },
+                {
+                  "key": "doctorId",
+                  "value": "{{uwimanaId}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appointmentDate\": \"2026-11-03\",\n  \"reason\": \"Acne treatment\",\n  \"status\": \"SCHEDULED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Appointment is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save appointment 8: diane with habimana on 2026-11-10 (CONFIRMED)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments/save?patientId={{dianeId}}&doctorId={{habimanaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "appointments",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "patientId",
+                  "value": "{{dianeId}}"
+                },
+                {
+                  "key": "doctorId",
+                  "value": "{{habimanaId}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appointmentDate\": \"2026-11-10\",\n  \"reason\": \"Cardiology consultation\",\n  \"status\": \"CONFIRMED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Appointment is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save appointment 9: aline with habimana on 2026-11-15 (SCHEDULED)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments/save?patientId={{alineId}}&doctorId={{habimanaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "appointments",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "patientId",
+                  "value": "{{alineId}}"
+                },
+                {
+                  "key": "doctorId",
+                  "value": "{{habimanaId}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appointmentDate\": \"2026-11-15\",\n  \"reason\": \"Second opinion\",\n  \"status\": \"SCHEDULED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Appointment is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Save appointment 10: patrick with mugisha on 2026-11-20 (COMPLETED)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments/save?patientId={{patrickId}}&doctorId={{mugishaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "appointments",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "patientId",
+                  "value": "{{patrickId}}"
+                },
+                {
+                  "key": "doctorId",
+                  "value": "{{mugishaId}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appointmentDate\": \"2026-11-20\",\n  \"reason\": \"Child check-up\",\n  \"status\": \"COMPLETED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Appointment is saved successfully\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Part A - derived queries",
+      "item": [
+        {
+          "name": "A1 Patients by last name",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/patients/by-last-name?lastName=uwase",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "patients",
+                "by-last-name"
+              ],
+              "query": [
+                {
+                  "key": "lastName",
+                  "value": "uwase"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const rows = pm.response.json();",
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"2 Uwase patients, Aline first\", () => {",
+                  "  pm.expect(rows.length).to.eql(2);",
+                  "  pm.expect(rows[0].firstName).to.eql(\"Aline\");",
+                  "  pm.expect(rows[1].firstName).to.eql(\"Grace\");",
+                  "});"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "A1 No match gives empty list",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/patients/by-last-name?lastName=nobody",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "patients",
+                "by-last-name"
+              ],
+              "query": [
+                {
+                  "key": "lastName",
+                  "value": "nobody"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"empty list\", () => pm.expect(pm.response.json()).to.eql([]));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "A2 Appointments by status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments/by-status?status=SCHEDULED",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "appointments",
+                "by-status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "SCHEDULED"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const rows = pm.response.json();",
+                  "pm.test(\"3 SCHEDULED, earliest first\", () => {",
+                  "  pm.expect(rows.length).to.eql(3);",
+                  "  pm.expect(rows.map(r => r.appointmentDate)).to.eql([\"2026-10-20\", \"2026-11-03\", \"2026-11-15\"]);",
+                  "});"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "A3 Appointments in October",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments/between?start=2026-10-01&end=2026-10-31",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "appointments",
+                "between"
+              ],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "2026-10-01"
+                },
+                {
+                  "key": "end",
+                  "value": "2026-10-31"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const rows = pm.response.json();",
+                  "pm.test(\"6 October appointments, ordered by date\", () => {",
+                  "  pm.expect(rows.length).to.eql(6);",
+                  "  const dates = rows.map(r => r.appointmentDate);",
+                  "  pm.expect(dates).to.eql([...dates].sort());",
+                  "});"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "A4 Double booking is rejected",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments/save?patientId={{dianeId}}&doctorId={{mugishaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "appointments",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "patientId",
+                  "value": "{{dianeId}}"
+                },
+                {
+                  "key": "doctorId",
+                  "value": "{{mugishaId}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appointmentDate\": \"2026-10-20\",\n  \"reason\": \"Extra visit\",\n  \"status\": \"SCHEDULED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"409 CONFLICT\", () => pm.response.to.have.status(409));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"Doctor is already booked on that date\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Part B - JPQL with joins",
+      "item": [
+        {
+          "name": "B1 Doctors by specialization",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/doctors/by-specialization?name=cardiology",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "doctors",
+                "by-specialization"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "cardiology"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const rows = pm.response.json();",
+                  "pm.test(\"Mugisha and Habimana\", () => pm.expect(rows.map(d => d.lastName).sort()).to.eql([\"Habimana\", \"Mugisha\"]));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "B2 Doctors without an office",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/doctors/without-office",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "doctors",
+                "without-office"
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const rows = pm.response.json();",
+                  "pm.test(\"only Habimana\", () => pm.expect(rows.map(d => d.lastName)).to.eql([\"Habimana\"]));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "B3 Specializations nobody offers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/specializations/unused",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "specializations",
+                "unused"
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const rows = pm.response.json();",
+                  "pm.test(\"only Neurology\", () => pm.expect(rows.map(s => s.name)).to.eql([\"Neurology\"]));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "B4 Patients of a doctor",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/patients/of-doctor/{{mugishaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "patients",
+                "of-doctor",
+                "{{mugishaId}}"
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const rows = pm.response.json();",
+                  "pm.test(\"Aline, Kevin, Patrick each once\", () => pm.expect(rows.map(p => p.firstName).sort()).to.eql([\"Aline\", \"Kevin\", \"Patrick\"]));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "B4 Unknown doctor gives 404",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/patients/of-doctor/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "patients",
+                "of-doctor",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"404\", () => pm.response.to.have.status(404));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"The doctor with that id does not exist\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Part C - aggregates and bulk",
+      "item": [
+        {
+          "name": "C1 Appointments per status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments/stats/by-status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "appointments",
+                "stats",
+                "by-status"
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const rows = pm.response.json();",
+                  "const counts = {};",
+                  "rows.forEach(r => counts[r[0]] = r[1]);",
+                  "pm.test(\"counts per status\", () => pm.expect(counts).to.eql({ CANCELLED: 3, SCHEDULED: 3, COMPLETED: 2, CONFIRMED: 2 }));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "C2 Frequent patients",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/patients/frequent?min=3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "patients",
+                "frequent"
+              ],
+              "query": [
+                {
+                  "key": "min",
+                  "value": "3"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const rows = pm.response.json();",
+                  "pm.test(\"only Aline\", () => pm.expect(rows.map(p => p.firstName)).to.eql([\"Aline\"]));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "C3 Busiest office",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/offices/busiest",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "offices",
+                "busiest"
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"office 101 with 5 appointments\", () => pm.expect(pm.response.json()).to.eql([\"Cardiology Wing\", 101, 5]));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "C4 Doctor is absent",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments/cancel-day?doctorId={{mugishaId}}&date=2026-10-20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "appointments",
+                "cancel-day"
+              ],
+              "query": [
+                {
+                  "key": "doctorId",
+                  "value": "{{mugishaId}}"
+                },
+                {
+                  "key": "date",
+                  "value": "2026-10-20"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"2 appointments cancelled\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bonus",
+      "item": [
+        {
+          "name": "Bonus Appointments page by page",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments/page?page=0&size=5&sort=appointmentDate,desc",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "appointments",
+                "page"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sort",
+                  "value": "appointmentDate,desc"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const body = pm.response.json();",
+                  "const info = body.page ? body.page : body;",
+                  "pm.test(\"5 rows, newest first\", () => {",
+                  "  pm.expect(body.content.length).to.eql(5);",
+                  "  pm.expect(body.content[0].appointmentDate).to.eql(\"2026-11-20\");",
+                  "});",
+                  "pm.test(\"total pages and elements\", () => {",
+                  "  pm.expect(info.totalElements).to.eql(10);",
+                  "  pm.expect(info.totalPages).to.eql(2);",
+                  "});"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Bonus Clean old cancellations",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments/cancelled-before?date=2026-10-15",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "appointments",
+                "cancelled-before"
+              ],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "2026-10-15"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 OK\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"message\", () => pm.expect(pm.response.text()).to.eql(\"2 appointments deleted\"));"
+                ],
+                "packages": {}
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
