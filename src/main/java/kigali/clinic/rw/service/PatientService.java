@@ -42,6 +42,7 @@ public class PatientService {
         patient.setFirstName(newPatient.getFirstName());
         patient.setLastName(newPatient.getLastName());
         patient.setDateOfBirth(newPatient.getDateOfBirth());
+        patient.setSsNumber(newPatient.getSsNumber());
         patRepo.save(patient);
         return "Patient is updated successfully";
     }
