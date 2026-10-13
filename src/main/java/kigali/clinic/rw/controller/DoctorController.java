@@ -114,5 +114,19 @@ public class DoctorController {
             return new ResponseEntity<>(returnedMessage, HttpStatus.NOT_FOUND);
         }
     }
+    @DeleteMapping(value = "/{doctorId}/specializations/{specializationId}")
+    public ResponseEntity<?> removeSpecialization(@PathVariable UUID doctorId, @PathVariable UUID specializationId){
+
+        String returnedMessage = docServe.removeSpecialization(doctorId, specializationId);
+
+        if(returnedMessage.equals("Specialization removed from the doctor")){
+            return new ResponseEntity<>(returnedMessage, HttpStatus.OK);
+        }else if(returnedMessage.equals("The doctor does not have that specialization")){
+            return new ResponseEntity<>(returnedMessage, HttpStatus.CONFLICT);
+        }else{
+            return new ResponseEntity<>(returnedMessage, HttpStatus.NOT_FOUND);
+        }
+    }
+
 
 }
