@@ -61,13 +61,20 @@ public class SpecializationService {
     @Transactional
     public String deleteSpecialization(UUID id){
 
-        if(!specRepo.existsById(id)){
+        Optional<Specialization> specialization = specRepo.findById(id);
+        if(specialization.isEmpty()){
             return "Specialization not found";
+        }
+
+        for(Doctor doctor : specialization.get().getDoctors()){
+            doctor.getSpecializations().remove(specialization.get());
+            docRepo.save(doctor);
         }
 
         specRepo.deleteById(id);
         return "Specialization is deleted successfully";
     }
+
 
     public List<Specialization> getUnusedSpecializations(){
         return specRepo.findUnused();
@@ -86,13 +93,14 @@ public class SpecializationService {
             return "Doctor not found";
         }
 
-        if(specialization.get().getDoctors().contains(doctor.get())){
+        if(doctor.get().getSpecializations().contains(specialization.get())){
             return "Doctor already has this specialization";
         }
 
-        specialization.get().getDoctors().add(doctor.get());
-        specRepo.save(specialization.get());
+        doctor.get().getSpecializations().add(specialization.get());
+        docRepo.save(doctor.get());
         return "Doctor is added to specialization successfully";
+
     }
 
     @Transactional
@@ -108,12 +116,13 @@ public class SpecializationService {
             return "Doctor not found";
         }
 
-        if(!specialization.get().getDoctors().contains(doctor.get())){
+        if(!doctor.get().getSpecializations().contains(specialization.get())){
             return "Doctor does not have this specialization";
         }
 
-        specialization.get().getDoctors().remove(doctor.get());
-        specRepo.save(specialization.get());
+        doctor.get().getSpecializations().remove(specialization.get());
+        docRepo.save(doctor.get());
         return "Doctor is removed from specialization successfully";
+
     }
 }
