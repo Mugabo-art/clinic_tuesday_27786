@@ -100,4 +100,19 @@ public class DoctorController {
         List<Doctor> doctors = docServe.getDoctorsWithoutOffice();
         return new ResponseEntity<>(doctors, HttpStatus.OK);
     }
+
+    @PutMapping(value = "/{doctorId}/specializations/{specializationId}")
+    public ResponseEntity<?> addSpecialization(@PathVariable UUID doctorId, @PathVariable UUID specializationId){
+
+        String returnedMessage = docServe.addSpecialization(doctorId, specializationId);
+
+        if(returnedMessage.equals("Specialization added to the doctor")){
+            return new ResponseEntity<>(returnedMessage, HttpStatus.OK);
+        }else if(returnedMessage.equals("The doctor already has that specialization")){
+            return new ResponseEntity<>(returnedMessage, HttpStatus.CONFLICT);
+        }else{
+            return new ResponseEntity<>(returnedMessage, HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

@@ -12,12 +12,18 @@ import kigali.clinic.rw.domain.Doctor;
 import kigali.clinic.rw.domain.Office;
 import kigali.clinic.rw.repository.DoctorRepository;
 import kigali.clinic.rw.repository.OfficeRepository;
+import kigali.clinic.rw.domain.Specialization;
+import kigali.clinic.rw.repository.SpecializationRepository;
+
 
 @Service 
 public class DoctorService {
 
     @Autowired 
     private DoctorRepository docRepo;
+
+    @Autowired 
+    private SpecializationRepository specRepo;
 
     @Autowired 
     private OfficeRepository offRepo;
@@ -88,6 +94,28 @@ public class DoctorService {
 
     public List<Doctor> getDoctorsWithoutOffice(){
         return docRepo.findWithoutOffice();
+    }
+    
+    @Transactional
+    public String addSpecialization(UUID doctorId, UUID specializationId){
+
+        Optional<Doctor> doctor = docRepo.findById(doctorId);
+        if(doctor.isEmpty()){
+            return "The doctor with that id does not exist";
+        }
+
+        Optional<Specialization> specialization = specRepo.findById(specializationId);
+        if(specialization.isEmpty()){
+            return "That specialization does not exist";
+        }
+
+        if(doctor.get().getSpecializations().contains(specialization.get())){
+            return "The doctor already has that specialization";
+        }
+
+        doctor.get().getSpecializations().add(specialization.get());
+        docRepo.save(doctor.get());
+        return "Specialization added to the doctor";
     }
 
     private String assignOffice(Doctor doctor, UUID officeId, UUID doctorId){
