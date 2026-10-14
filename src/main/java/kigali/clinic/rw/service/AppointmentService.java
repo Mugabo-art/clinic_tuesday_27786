@@ -18,6 +18,8 @@ import kigali.clinic.rw.domain.Patient;
 import kigali.clinic.rw.repository.AppointmentRepository;
 import kigali.clinic.rw.repository.DoctorRepository;
 import kigali.clinic.rw.repository.PatientRepository;
+import kigali.clinic.rw.repository.PrescriptionRepository;
+
 
 @Service
 public class AppointmentService {
@@ -27,6 +29,9 @@ public class AppointmentService {
 
     @Autowired
     private PatientRepository patRepo;
+
+    @Autowired
+    private PrescriptionRepository presRepo;
 
     @Autowired
     private DoctorRepository docRepo;
@@ -87,6 +92,10 @@ public class AppointmentService {
 
         if (!appRepo.existsById(id)) {
             return "Appointment not found";
+        }
+
+        if (presRepo.existsByAppointmentId(id)) {
+            return "That appointment has prescriptions, delete them first";
         }
 
         appRepo.deleteById(id);

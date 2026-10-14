@@ -91,9 +91,12 @@ public class AppointmentController {
 
         if(returnedMessage.equals("Appointment is deleted successfully")){
             return new ResponseEntity<>(returnedMessage, HttpStatus.OK);
+        }else if(returnedMessage.equals("That appointment has prescriptions, delete them first")){
+            return new ResponseEntity<>(returnedMessage, HttpStatus.CONFLICT);
         }else{
             return new ResponseEntity<>(returnedMessage, HttpStatus.NOT_FOUND);
         }
+
     }
 
     @GetMapping(value = "/by-status")
