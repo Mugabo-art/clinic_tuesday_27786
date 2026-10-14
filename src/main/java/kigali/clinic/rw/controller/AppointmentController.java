@@ -46,9 +46,12 @@ public class AppointmentController {
             return new ResponseEntity<>(returnedMessage, HttpStatus.OK);
         }else if(returnedMessage.equals("Patient not found") || returnedMessage.equals("Doctor not found")){
             return new ResponseEntity<>(returnedMessage, HttpStatus.NOT_FOUND);
+        }else if(returnedMessage.equals("Appointment date cannot be in the past")){
+            return new ResponseEntity<>(returnedMessage, HttpStatus.BAD_REQUEST);
         }else{
             return new ResponseEntity<>(returnedMessage, HttpStatus.CONFLICT);
         }
+
     }
 
     @GetMapping(value = "/all")

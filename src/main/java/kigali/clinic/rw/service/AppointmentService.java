@@ -31,27 +31,29 @@ public class AppointmentService {
     @Autowired
     private DoctorRepository docRepo;
 
-
-    public String saveAppointment(Appointment appointment, UUID patientId, UUID doctorId){
+    public String saveAppointment(Appointment appointment, UUID patientId, UUID doctorId) {
 
         Optional<Patient> patient = patRepo.findById(patientId);
-        if(patient.isEmpty()){
+        if (patient.isEmpty()) {
             return "Patient not found";
         }
 
         Optional<Doctor> doctor = docRepo.findById(doctorId);
-        if(doctor.isEmpty()){
+        if (doctor.isEmpty()) {
             return "Doctor not found";
         }
 
-        boolean alreadyBooked = appRepo.existsByDoctorIdAndAppointmentDateAndStatusNot(doctorId, appointment.getAppointmentDate(), AppointmentStatus.CANCELLED);
-        if(alreadyBooked){
+        if (appointment.getAppointmentDate().isBefore(LocalDate.now())) {
+            return "Appointment date cannot be in the past";
+        }
+
+        boolean alreadyBooked = appRepo.existsByDoctorIdAndAppointmentDateAndStatusNot(doctorId,
+                appointment.getAppointmentDate(), AppointmentStatus.CANCELLED);
+        if (alreadyBooked) {
             return "Doctor is already booked on that date";
         }
 
-        if(appointment.getStatus() == null){
-            appointment.setStatus(AppointmentStatus.SCHEDULED);
-        }
+        appointment.setStatus(AppointmentStatus.SCHEDULED);
 
         appointment.setPatient(patient.get());
         appointment.setDoctor(doctor.get());
@@ -59,18 +61,18 @@ public class AppointmentService {
         return "Appointment is saved successfully";
     }
 
-    public List<Appointment> getAllAppointments(){
+    public List<Appointment> getAllAppointments() {
         return appRepo.findAll();
     }
 
-    public Optional<Appointment> getAppointmentById(UUID id){
+    public Optional<Appointment> getAppointmentById(UUID id) {
         return appRepo.findById(id);
     }
 
-    public String updateAppointment(UUID id, Appointment newAppointment){
+    public String updateAppointment(UUID id, Appointment newAppointment) {
 
         Optional<Appointment> existing = appRepo.findById(id);
-        if(existing.isEmpty()){
+        if (existing.isEmpty()) {
             return "Appointment not found";
         }
 
@@ -82,9 +84,9 @@ public class AppointmentService {
         return "Appointment is updated successfully";
     }
 
-    public String deleteAppointment(UUID id){
+    public String deleteAppointment(UUID id) {
 
-        if(!appRepo.existsById(id)){
+        if (!appRepo.existsById(id)) {
             return "Appointment not found";
         }
 
@@ -92,30 +94,30 @@ public class AppointmentService {
         return "Appointment is deleted successfully";
     }
 
-    public List<Appointment> getAppointmentsByStatus(AppointmentStatus status){
+    public List<Appointment> getAppointmentsByStatus(AppointmentStatus status) {
         return appRepo.findByStatusOrderByAppointmentDateAsc(status);
     }
 
-    public List<Appointment> getAppointmentsBetween(LocalDate start, LocalDate end){
+    public List<Appointment> getAppointmentsBetween(LocalDate start, LocalDate end) {
         return appRepo.findByAppointmentDateBetweenOrderByAppointmentDateAsc(start, end);
     }
 
-    public List<Object[]> countAppointmentsPerStatus(){
+    public List<Object[]> countAppointmentsPerStatus() {
         return appRepo.countAppointmentsPerStatus();
     }
 
     @Transactional
-    public String cancelDay(UUID doctorId, LocalDate date){
+    public String cancelDay(UUID doctorId, LocalDate date) {
         int cancelled = appRepo.cancelDay(doctorId, date, AppointmentStatus.CANCELLED, AppointmentStatus.COMPLETED);
         return cancelled + " appointments cancelled";
     }
 
-    public Page<Appointment> getAppointmentsPage(Pageable pageable){
+    public Page<Appointment> getAppointmentsPage(Pageable pageable) {
         return appRepo.findAll(pageable);
     }
 
     @Transactional
-    public String deleteCancelledBefore(LocalDate date){
+    public String deleteCancelledBefore(LocalDate date) {
         int deleted = appRepo.deleteByStatusBefore(AppointmentStatus.CANCELLED, date);
         return deleted + " appointments deleted";
     }
