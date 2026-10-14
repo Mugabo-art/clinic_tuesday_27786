@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+
 
 import kigali.clinic.rw.domain.Prescription;
 import kigali.clinic.rw.service.PrescriptionService;
@@ -66,5 +69,30 @@ public class PrescriptionController {
         List<Prescription> prescriptions = presServe.getHistoryOfPatient(ssNumber);
         return new ResponseEntity<>(prescriptions, HttpStatus.OK);
     }
+
+    @PutMapping(value = "/update/{id}")
+    public ResponseEntity<?> updatePrescription(@PathVariable UUID id, @RequestBody Prescription prescription){
+
+        String returnedMessage = presServe.updatePrescription(id, prescription);
+
+        if(returnedMessage.equals("Prescription updated successfully")){
+            return new ResponseEntity<>(returnedMessage, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(returnedMessage, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity<?> deletePrescription(@PathVariable UUID id){
+
+        String returnedMessage = presServe.deletePrescription(id);
+
+        if(returnedMessage.equals("Prescription deleted successfully")){
+            return new ResponseEntity<>(returnedMessage, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(returnedMessage, HttpStatus.NOT_FOUND);
+        }
+    }
+
 
 }
