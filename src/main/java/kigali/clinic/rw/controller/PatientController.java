@@ -105,4 +105,5 @@ public class PatientController {
         List<Patient> patients = patServe.getFrequentPatients(min);
         return new ResponseEntity<>(patients, HttpStatus.OK);
     }
+    
 }

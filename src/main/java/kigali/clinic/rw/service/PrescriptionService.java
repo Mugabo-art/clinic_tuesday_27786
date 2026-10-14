@@ -1,12 +1,13 @@
 package kigali.clinic.rw.service;
+
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.List;
 
 import kigali.clinic.rw.domain.Appointment;
 import kigali.clinic.rw.domain.AppointmentStatus;
 import kigali.clinic.rw.domain.Prescription;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,14 +24,14 @@ public class PrescriptionService {
     @Autowired
     private AppointmentRepository appRepo;
 
-    public String savePrescription(Prescription prescription, UUID appointmentId){
+    public String savePrescription(Prescription prescription, UUID appointmentId) {
 
         Optional<Appointment> appointment = appRepo.findById(appointmentId);
-        if(appointment.isEmpty()){
+        if (appointment.isEmpty()) {
             return "The appointment with that id does not exist";
         }
 
-        if(appointment.get().getStatus() != AppointmentStatus.COMPLETED){
+        if (appointment.get().getStatus() != AppointmentStatus.COMPLETED) {
             return "Prescriptions are only for COMPLETED appointments";
         }
 
@@ -40,5 +41,8 @@ public class PrescriptionService {
         return "Prescription saved successfully";
     }
 
+    public List<Prescription> getPrescriptionsOfAppointment(Appointment appointment) {
+        return presRepo.findByAppointment(appointment);
+    }
 
 }
