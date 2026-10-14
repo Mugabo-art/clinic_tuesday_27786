@@ -1,72 +1,79 @@
-# Clinic Management API
+# Clinic API (Quiz 1 + Quiz 2)
 
-A Spring Boot REST API for managing a clinic: doctors, patients, offices, specializations and appointments.
+This is my Spring Boot project for a clinic. It manages patients, doctors, offices,
+specializations, appointments and prescriptions.
 
-## Tech stack
-
+## What I used
 - Java 21
-- Spring Boot 4.1 (Web MVC, Data JPA)
+- Spring Boot 4.1 (Web MVC and Data JPA)
 - PostgreSQL
 - Maven
 
-## Domain model
+## How to run it
+1. Create a database called `clinic` in PostgreSQL.
+2. Check the username and password in `src/main/resources/application.properties`.
+3. Run `./mvnw spring-boot:run`
+4. The API runs on http://localhost:8083
 
-| Entity | Fields | Relationships |
-|---|---|---|
-| Doctor | firstName, lastName, dateOfBirth | One-to-one with Office, many-to-many with Specialization, one-to-many with Appointment |
-| Patient | firstName, lastName, dateOfBirth | One-to-many with Appointment |
-| Office | name, officeNumber | One-to-one with Doctor |
-| Specialization | name | Many-to-many with Doctor |
-| Appointment | appointmentDate, reason, status | Many-to-one with Patient and Doctor |
+I use `ddl-auto=update`, so the data stays when I restart the app, and new tables or
+columns are added automatically.
 
-Appointment status is one of `SCHEDULED`, `CONFIRMED`, `COMPLETED`, `CANCELLED`. All ids are UUIDs.
+## The entities
+- Patient: firstName, lastName, dateOfBirth, ssNumber (unique)
+- Doctor: firstName, lastName, dateOfBirth, one office, many specializations
+- Office: name, officeNumber (unique)
+- Specialization: name
+- Appointment: appointmentDate, reason, status, patient, doctor
+- Prescription (new in Quiz 2): medicineName, dosage, durationDays, issuedDate, appointment
 
-## Running the project
+An appointment status can be SCHEDULED, CONFIRMED, COMPLETED or CANCELLED.
+The doctor owns the doctor-specialization link (table doctor_specialization).
 
-1. Create a PostgreSQL database named `clinic`.
-2. Update the username and password in `src/main/resources/application.properties` if they differ from yours.
-3. Start the app:
+## Rules for appointments
+- A new appointment cannot be in the past, and it always starts as SCHEDULED.
+- The status can only move like this:
+  SCHEDULED -> CONFIRMED or CANCELLED,
+  CONFIRMED -> COMPLETED or CANCELLED.
+  COMPLETED and CANCELLED are final.
+- The normal update (PUT) does not change the status anymore.
+- A completed or cancelled appointment cannot be rescheduled.
+- Prescriptions can only be written for COMPLETED appointments.
+- An appointment that has prescriptions cannot be deleted.
 
-   ```
-   ./mvnw spring-boot:run
-   ```
+## Quiz 2 endpoints
 
-The API runs on `http://localhost:8083`. Tables are recreated on every start (`ddl-auto=create`), so data does not persist between runs.
+Part A
+- PUT /api/doctors/{doctorId}/specializations/{specializationId} - add a specialization to a doctor
+- DELETE /api/doctors/{doctorId}/specializations/{specializationId} - remove it from the doctor
+- GET /api/offices/free - offices with no doctor
+- PATCH /api/doctors/{doctorId}/office?officeNumber=104 - move a doctor to another office
 
-## API endpoints
+Part B
+- POST /api/appointments/save?patientId=...&doctorId=... - book an appointment (with the new rules)
+- PATCH /api/appointments/{id}/status?status=CONFIRMED - change the status
+- PATCH /api/appointments/{id}/reschedule?newDate=2026-10-30 - move to another date
 
-Every resource has the same CRUD endpoints under its base path:
+Part C
+- POST /api/prescriptions/save?appointmentId=... - write a prescription
+- GET /api/prescriptions/appointment/{appointmentId} - prescriptions of an appointment
+- GET /api/prescriptions/patient/{ssNumber} - history of a patient, newest first
+- PUT /api/prescriptions/update/{id} - change medicine, dosage and days
+- DELETE /api/prescriptions/delete/{id} - delete a prescription
 
-| Method | Path | Description |
-|---|---|---|
-| POST | `/save` | Create |
-| GET | `/all` | List all |
-| GET | `/{id}` | Get one by id |
-| PUT | `/update/{id}` | Update |
-| DELETE | `/delete/{id}` | Delete |
+Part D
+- GET /api/doctors/{doctorId}/agenda?date=2026-10-20 - a doctor's day, without cancelled ones
+- GET /api/patients/{ssNumber}/upcoming - next appointments of a patient
+- GET /api/doctors/search?name=gis - search doctors by first or last name
+- GET /api/dashboard/summary - numbers for the clinic
 
-Base paths: `/api/doctors`, `/api/patients`, `/api/offices`, `/api/specializations`, `/api/appointments`.
+Bonus
+- GET /api/prescriptions/stats/top-medicines - most prescribed medicines
+- GET /api/doctors/workload?start=2026-10-01&end=2026-10-31 - completed appointments per doctor
 
-### Extra queries
-
-| Method | Path | Parameters |
-|---|---|---|
-| GET | `/api/doctors/by-specialization` | `name` |
-| GET | `/api/doctors/without-office` | |
-| GET | `/api/patients/by-last-name` | `lastName` |
-| GET | `/api/patients/of-doctor/{doctorId}` | |
-| GET | `/api/patients/frequent` | `min` (minimum number of appointments) |
-| GET | `/api/offices/busiest` | |
-| GET | `/api/specializations/unused` | |
-| POST | `/api/specializations/{id}/doctor/{doctorId}` | Assign a doctor to a specialization |
-| DELETE | `/api/specializations/{id}/doctor/{doctorId}` | Remove a doctor from a specialization |
-| GET | `/api/appointments/by-status` | `status` |
-| GET | `/api/appointments/between` | `start`, `end` (dates) |
-| GET | `/api/appointments/stats/by-status` | |
-| PATCH | `/api/appointments/cancel-day` | `doctorId`, `date` |
-| GET | `/api/appointments/page` | `page`, `size`, `sort` |
-| DELETE | `/api/appointments/cancelled-before` | `date` |
+The Quiz 1 endpoints are still there (save, all, {id}, update, delete for every entity,
+and the search queries).
 
 ## Testing
-
-Import `clinic.postman_collection.json` into Postman to get ready-made requests for every endpoint.
+I tested everything with Postman:
+- `clinic.postman_collection.json` - Quiz 1
+- `clinic-quiz2.postman_collection.json` - Quiz 2, one request per requirement (A1, A2 ... D4)

@@ -6,7 +6,6 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.ArrayList;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +20,6 @@ import kigali.clinic.rw.repository.AppointmentRepository;
 import kigali.clinic.rw.repository.DoctorRepository;
 import kigali.clinic.rw.repository.PatientRepository;
 import kigali.clinic.rw.repository.PrescriptionRepository;
-
 
 @Service
 public class AppointmentService {
@@ -60,6 +58,7 @@ public class AppointmentService {
             return "Doctor is already booked on that date";
         }
 
+        // a new appointment always starts as SCHEDULED, even if the JSON sends another status
         appointment.setStatus(AppointmentStatus.SCHEDULED);
 
         appointment.setPatient(patient.get());
@@ -96,6 +95,7 @@ public class AppointmentService {
             return "Appointment not found";
         }
 
+        // an appointment that still has prescriptions cannot be deleted
         if (presRepo.existsByAppointmentId(id)) {
             return "That appointment has prescriptions, delete them first";
         }
@@ -132,17 +132,17 @@ public class AppointmentService {
         return deleted + " appointments deleted";
     }
 
-    public String changeStatus(UUID id, AppointmentStatus newStatus){
+    public String changeStatus(UUID id, AppointmentStatus newStatus) {
 
         Optional<Appointment> existing = appRepo.findById(id);
-        if(existing.isEmpty()){
+        if (existing.isEmpty()) {
             return "The appointment with that id does not exist";
         }
 
         Appointment appointment = existing.get();
         AppointmentStatus currentStatus = appointment.getStatus();
 
-        if(!isAllowedMove(currentStatus, newStatus)){
+        if (!isAllowedMove(currentStatus, newStatus)) {
             return "Cannot change status from " + currentStatus + " to " + newStatus;
         }
 
@@ -151,26 +151,28 @@ public class AppointmentService {
         return "Appointment status updated successfully";
     }
 
-    public String reschedule(UUID id, LocalDate newDate){
+    public String reschedule(UUID id, LocalDate newDate) {
 
         Optional<Appointment> existing = appRepo.findById(id);
-        if(existing.isEmpty()){
+        if (existing.isEmpty()) {
             return "The appointment with that id does not exist";
         }
-        
+
         Appointment appointment = existing.get();
 
-        if(appointment.getStatus() == AppointmentStatus.COMPLETED || appointment.getStatus() == AppointmentStatus.CANCELLED){
+        if (appointment.getStatus() == AppointmentStatus.COMPLETED
+                || appointment.getStatus() == AppointmentStatus.CANCELLED) {
             return "A " + appointment.getStatus() + " appointment cannot be rescheduled";
         }
 
-        if(newDate.isBefore(LocalDate.now())){
+        if (newDate.isBefore(LocalDate.now())) {
             return "Appointment date cannot be in the past";
         }
 
         UUID doctorId = appointment.getDoctor().getId();
-        boolean alreadyBooked = appRepo.existsByDoctorIdAndAppointmentDateAndStatusNot(doctorId, newDate, AppointmentStatus.CANCELLED);
-        if(alreadyBooked){
+        boolean alreadyBooked = appRepo.existsByDoctorIdAndAppointmentDateAndStatusNot(doctorId, newDate,
+                AppointmentStatus.CANCELLED);
+        if (alreadyBooked) {
             return "Doctor is already booked on that date";
         }
 
@@ -180,30 +182,33 @@ public class AppointmentService {
         return "Appointment rescheduled successfully";
     }
 
-    public List<Appointment> getAgenda(UUID doctorId, LocalDate date){
+    public List<Appointment> getAgenda(UUID doctorId, LocalDate date) {
         return appRepo.findByDoctorIdAndAppointmentDateAndStatusNot(doctorId, date, AppointmentStatus.CANCELLED);
     }
 
-    public List<Appointment> getUpcoming(String ssNumber){
+    public List<Appointment> getUpcoming(String ssNumber) {
 
         List<AppointmentStatus> statuses = new ArrayList<>();
         statuses.add(AppointmentStatus.SCHEDULED);
         statuses.add(AppointmentStatus.CONFIRMED);
 
-        return appRepo.findByPatientSsNumberAndAppointmentDateGreaterThanEqualAndStatusInOrderByAppointmentDateAsc(ssNumber, LocalDate.now(), statuses);
+        return appRepo.findByPatientSsNumberAndAppointmentDateGreaterThanEqualAndStatusInOrderByAppointmentDateAsc(
+                ssNumber, LocalDate.now(), statuses);
     }
-    
 
-    private boolean isAllowedMove(AppointmentStatus current, AppointmentStatus next){
+    // checks if the status change is allowed.
+    // SCHEDULED can go to CONFIRMED or CANCELLED, CONFIRMED can go to COMPLETED or CANCELLED.
+    // COMPLETED and CANCELLED are final, so for them it always returns false.
+    private boolean isAllowedMove(AppointmentStatus current, AppointmentStatus next) {
 
-        if(current == AppointmentStatus.SCHEDULED){
-            if(next == AppointmentStatus.CONFIRMED || next == AppointmentStatus.CANCELLED){
+        if (current == AppointmentStatus.SCHEDULED) {
+            if (next == AppointmentStatus.CONFIRMED || next == AppointmentStatus.CANCELLED) {
                 return true;
             }
         }
 
-        if(current == AppointmentStatus.CONFIRMED){
-            if(next == AppointmentStatus.COMPLETED || next == AppointmentStatus.CANCELLED){
+        if (current == AppointmentStatus.CONFIRMED) {
+            if (next == AppointmentStatus.COMPLETED || next == AppointmentStatus.CANCELLED) {
                 return true;
             }
         }
