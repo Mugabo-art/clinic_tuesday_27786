@@ -45,4 +45,8 @@ public class PrescriptionService {
         return presRepo.findByAppointment(appointment);
     }
 
+    public List<Prescription> getHistoryOfPatient(String ssNumber){
+        return presRepo.findHistoryOfPatient(ssNumber);
+    }
+
 }

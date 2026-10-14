@@ -61,5 +61,10 @@ public class PrescriptionController {
         return new ResponseEntity<>(prescriptions, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/patient/{ssNumber}")
+    public ResponseEntity<?> getHistoryOfPatient(@PathVariable String ssNumber){
+        List<Prescription> prescriptions = presServe.getHistoryOfPatient(ssNumber);
+        return new ResponseEntity<>(prescriptions, HttpStatus.OK);
+    }
 
 }
