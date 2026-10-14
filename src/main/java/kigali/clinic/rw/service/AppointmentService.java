@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.ArrayList;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -182,6 +184,15 @@ public class AppointmentService {
         return appRepo.findByDoctorIdAndAppointmentDateAndStatusNot(doctorId, date, AppointmentStatus.CANCELLED);
     }
 
+    public List<Appointment> getUpcoming(String ssNumber){
+
+        List<AppointmentStatus> statuses = new ArrayList<>();
+        statuses.add(AppointmentStatus.SCHEDULED);
+        statuses.add(AppointmentStatus.CONFIRMED);
+
+        return appRepo.findByPatientSsNumberAndAppointmentDateGreaterThanEqualAndStatusInOrderByAppointmentDateAsc(ssNumber, LocalDate.now(), statuses);
+    }
+    
 
     private boolean isAllowedMove(AppointmentStatus current, AppointmentStatus next){
 

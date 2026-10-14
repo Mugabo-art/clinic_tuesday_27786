@@ -2,6 +2,8 @@ package kigali.clinic.rw.repository;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.Optional;
+
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,6 +16,7 @@ import kigali.clinic.rw.domain.Patient;
 public interface PatientRepository extends JpaRepository<Patient,UUID> {
 
     List<Patient> findByLastNameIgnoreCaseOrderByFirstNameAsc(String lastName);
+    Optional<Patient> findBySsNumber(String ssNumber);
 
     @Query("SELECT DISTINCT a.patient FROM Appointment a WHERE a.doctor.id = :doctorId")
     List<Patient> findPatientsOfDoctor(@Param("doctorId") UUID doctorId);

@@ -74,4 +74,9 @@ public class PatientService {
     public List<Patient> getFrequentPatients(long min){
         return patRepo.findFrequentPatients(min);
     }
+    
+    public Optional<Patient> getPatientBySsNumber(String ssNumber){
+        return patRepo.findBySsNumber(ssNumber);
+    }
+
 }

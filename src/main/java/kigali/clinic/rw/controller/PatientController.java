@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import kigali.clinic.rw.domain.Patient;
 import kigali.clinic.rw.service.DoctorService;
 import kigali.clinic.rw.service.PatientService;
+import kigali.clinic.rw.domain.Appointment;
+import kigali.clinic.rw.service.AppointmentService;
+
 
 
 @RestController
@@ -31,6 +34,10 @@ public class PatientController {
 
     @Autowired
     private DoctorService docServe;
+
+    @Autowired
+    private AppointmentService appServe;
+
 
 
     @PostMapping(value = "/save")
@@ -106,4 +113,15 @@ public class PatientController {
         return new ResponseEntity<>(patients, HttpStatus.OK);
     }
     
+    @GetMapping(value = "/{ssNumber}/upcoming")
+    public ResponseEntity<?> getUpcoming(@PathVariable String ssNumber){
+
+        if(patServe.getPatientBySsNumber(ssNumber).isEmpty()){
+            return new ResponseEntity<>("That patient with that ssnumber does not exist", HttpStatus.NOT_FOUND);
+        }
+
+        List<Appointment> appointments = appServe.getUpcoming(ssNumber);
+        return new ResponseEntity<>(appointments, HttpStatus.OK);
+    }
+
 }
