@@ -140,6 +140,35 @@ public class AppointmentService {
         return "Appointment status updated successfully";
     }
 
+    public String reschedule(UUID id, LocalDate newDate){
+
+        Optional<Appointment> existing = appRepo.findById(id);
+        if(existing.isEmpty()){
+            return "The appointment with that id does not exist";
+        }
+
+        Appointment appointment = existing.get();
+
+        if(appointment.getStatus() == AppointmentStatus.COMPLETED || appointment.getStatus() == AppointmentStatus.CANCELLED){
+            return "A " + appointment.getStatus() + " appointment cannot be rescheduled";
+        }
+
+        if(newDate.isBefore(LocalDate.now())){
+            return "Appointment date cannot be in the past";
+        }
+
+        UUID doctorId = appointment.getDoctor().getId();
+        boolean alreadyBooked = appRepo.existsByDoctorIdAndAppointmentDateAndStatusNot(doctorId, newDate, AppointmentStatus.CANCELLED);
+        if(alreadyBooked){
+            return "Doctor is already booked on that date";
+        }
+
+        appointment.setAppointmentDate(newDate);
+        appointment.setStatus(AppointmentStatus.SCHEDULED);
+        appRepo.save(appointment);
+        return "Appointment rescheduled successfully";
+    }
+
 
     private boolean isAllowedMove(AppointmentStatus current, AppointmentStatus next){
 

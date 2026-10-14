@@ -159,4 +159,20 @@ public class AppointmentController {
         }
     }
 
+    @PatchMapping(value = "/{id}/reschedule")
+    public ResponseEntity<?> reschedule(@PathVariable UUID id, @RequestParam String newDate){
+
+        String returnedMessage = appServe.reschedule(id, LocalDate.parse(newDate));
+
+        if(returnedMessage.equals("Appointment rescheduled successfully")){
+            return new ResponseEntity<>(returnedMessage, HttpStatus.OK);
+        }else if(returnedMessage.equals("The appointment with that id does not exist")){
+            return new ResponseEntity<>(returnedMessage, HttpStatus.NOT_FOUND);
+        }else if(returnedMessage.equals("Doctor is already booked on that date")){
+            return new ResponseEntity<>(returnedMessage, HttpStatus.CONFLICT);
+        }else{
+            return new ResponseEntity<>(returnedMessage, HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }
