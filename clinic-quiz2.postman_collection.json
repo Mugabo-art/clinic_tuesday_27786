@@ -1,0 +1,557 @@
+{
+  "info": {
+    "_postman_id": "e28ede26-dadc-4006-80ba-49ae032fe482",
+    "name": "clinic-quiz2",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58431807"
+  },
+  "item": [
+    {
+      "name": "A1",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/doctors/13020ea0-326b-4e88-810a-b3839ef0b673/specializations/2f90c9f8-9ad8-4c1a-b411-a3b4f82ee203",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "doctors",
+            "13020ea0-326b-4e88-810a-b3839ef0b673",
+            "specializations",
+            "2f90c9f8-9ad8-4c1a-b411-a3b4f82ee203"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "A2",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/doctors/13020ea0-326b-4e88-810a-b3839ef0b673/specializations/2f90c9f8-9ad8-4c1a-b411-a3b4f82ee203",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "doctors",
+            "13020ea0-326b-4e88-810a-b3839ef0b673",
+            "specializations",
+            "2f90c9f8-9ad8-4c1a-b411-a3b4f82ee203"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "A3",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/offices/free",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "offices",
+            "free"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "A4",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/doctors/13020ea0-326b-4e88-810a-b3839ef0b673/office?officeNumber=104",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "doctors",
+            "13020ea0-326b-4e88-810a-b3839ef0b673",
+            "office"
+          ],
+          "query": [
+            {
+              "key": "officeNumber",
+              "value": "104",
+              "sortOrder": 0
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "B1",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"appointmentDate\": \"2026-11-05\",\r\n    \"reason\": \"Back pain\",\r\n    \"status\": \"COMPLETED\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8083/api/appointments/save?patientId=28124696-6b1c-4bc1-902d-759520cd4d0a&doctorId=f728acda-e134-4f0a-80d8-b3ab5a9cc54d",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "appointments",
+            "save"
+          ],
+          "query": [
+            {
+              "key": "patientId",
+              "value": "28124696-6b1c-4bc1-902d-759520cd4d0a",
+              "sortOrder": 0
+            },
+            {
+              "key": "doctorId",
+              "value": "f728acda-e134-4f0a-80d8-b3ab5a9cc54d",
+              "sortOrder": 1
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "B2",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/appointments/75b0ef04-edfe-4bba-a7b3-30ce5c4a43be/status?status=CONFIRMED",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "appointments",
+            "75b0ef04-edfe-4bba-a7b3-30ce5c4a43be",
+            "status"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "CONFIRMED"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "B3",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/appointments/75b0ef04-edfe-4bba-a7b3-30ce5c4a43be/reschedule?newDate=2026-10-30",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "appointments",
+            "75b0ef04-edfe-4bba-a7b3-30ce5c4a43be",
+            "reschedule"
+          ],
+          "query": [
+            {
+              "key": "newDate",
+              "value": "2026-10-30",
+              "sortOrder": 0
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C1",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"medicineName\": \"Amoxicillin\",\r\n    \"dosage\": \"1 tablet, 3 times a day\",\r\n    \"durationDays\": 7\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8083/api/prescriptions/save?appointmentId=6980057f-ff76-4cf0-b6f7-03bcfeec4c0e",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "prescriptions",
+            "save"
+          ],
+          "query": [
+            {
+              "key": "appointmentId",
+              "value": "6980057f-ff76-4cf0-b6f7-03bcfeec4c0e"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C2",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/prescriptions/appointment/f331d433-db2c-4d05-9822-73c4d3f2f147",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "prescriptions",
+            "appointment",
+            "f331d433-db2c-4d05-9822-73c4d3f2f147"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C3",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/prescriptions/patient/1199580000000001",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "prescriptions",
+            "patient",
+            "1199580000000001"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C4 update",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"medicineName\": \"Paracetamol\",\r\n    \"dosage\": \"1 tablet, every 6 hours\",\r\n    \"durationDays\": 3,\r\n    \"issuedDate\": \"2020-01-01\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8083/api/prescriptions/update/e26a43d8-37a0-4a14-88c6-fa3e153d67a2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "prescriptions",
+            "update",
+            "e26a43d8-37a0-4a14-88c6-fa3e153d67a2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C4 delete",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/prescriptions/delete/9f80632a-b1ca-4685-83bc-a5b5684918fb",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "prescriptions",
+            "delete",
+            "9f80632a-b1ca-4685-83bc-a5b5684918fb"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C4 protect",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/appointments/delete/6980057f-ff76-4cf0-b6f7-03bcfeec4c0e",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "appointments",
+            "delete",
+            "6980057f-ff76-4cf0-b6f7-03bcfeec4c0e"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D1",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/doctors/13020ea0-326b-4e88-810a-b3839ef0b673/agenda?date=2026-10-20",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "doctors",
+            "13020ea0-326b-4e88-810a-b3839ef0b673",
+            "agenda"
+          ],
+          "query": [
+            {
+              "key": "date",
+              "value": "2026-10-20",
+              "sortOrder": 0
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D2",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/patients/1199580000000001/upcoming",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "patients",
+            "1199580000000001",
+            "upcoming"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D3",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/doctors/search?name=gis",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "doctors",
+            "search"
+          ],
+          "query": [
+            {
+              "key": "name",
+              "value": "gis",
+              "sortOrder": 0
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D4",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/dashboard/summary",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "dashboard",
+            "summary"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Bonus top-medicines",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/prescriptions/stats/top-medicines",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "prescriptions",
+            "stats",
+            "top-medicines"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Bonus workload",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/doctors/workload?start=2026-10-01&end=2026-10-31",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "doctors",
+            "workload"
+          ],
+          "query": [
+            {
+              "key": "start",
+              "value": "2026-10-01",
+              "sortOrder": 0
+            },
+            {
+              "key": "end",
+              "value": "2026-10-31",
+              "sortOrder": 1
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
