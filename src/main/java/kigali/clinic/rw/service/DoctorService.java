@@ -3,6 +3,10 @@ package kigali.clinic.rw.service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.time.LocalDate;
+
+import kigali.clinic.rw.domain.AppointmentStatus;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -162,6 +166,11 @@ public class DoctorService {
     public List<Doctor> searchByName(String name){
         return docRepo.searchByName(name);
     }
+    
+    public List<Object[]> getWorkload(LocalDate start, LocalDate end){
+        return docRepo.countWorkload(AppointmentStatus.COMPLETED, start, end);
+    }
+
 
     private String assignOffice(Doctor doctor, UUID officeId, UUID doctorId) {
 

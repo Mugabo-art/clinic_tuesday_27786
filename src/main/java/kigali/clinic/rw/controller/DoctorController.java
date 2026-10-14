@@ -168,5 +168,11 @@ public class DoctorController {
         return new ResponseEntity<>(doctors, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/workload")
+    public ResponseEntity<?> getWorkload(@RequestParam String start, @RequestParam String end){
+        List<Object[]> rows = docServe.getWorkload(LocalDate.parse(start), LocalDate.parse(end));
+        return new ResponseEntity<>(rows, HttpStatus.OK);
+    }
+
 
 }

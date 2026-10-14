@@ -3,6 +3,10 @@ package kigali.clinic.rw.repository;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.time.LocalDate;
+
+import kigali.clinic.rw.domain.AppointmentStatus;
+
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -29,5 +33,12 @@ public interface DoctorRepository extends JpaRepository<Doctor,UUID> {
            "OR LOWER(d.lastName) LIKE LOWER(CONCAT('%', :name, '%')) " +
            "ORDER BY d.lastName ASC")
     List<Doctor> searchByName(@Param("name") String name);
+
+    @Query("SELECT d.firstName, d.lastName, COUNT(a) " +
+           "FROM Appointment a JOIN a.doctor d " +
+           "WHERE a.status = :status AND a.appointmentDate BETWEEN :start AND :end " +
+           "GROUP BY d.id, d.firstName, d.lastName " +
+           "ORDER BY COUNT(a) DESC")
+    List<Object[]> countWorkload(@Param("status") AppointmentStatus status, @Param("start") LocalDate start, @Param("end") LocalDate end);
 
 }
