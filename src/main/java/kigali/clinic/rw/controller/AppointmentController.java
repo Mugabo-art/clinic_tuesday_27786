@@ -144,4 +144,19 @@ public class AppointmentController {
         String returnedMessage = appServe.deleteCancelledBefore(LocalDate.parse(date));
         return new ResponseEntity<>(returnedMessage, HttpStatus.OK);
     }
+
+    @PatchMapping(value = "/{id}/status")
+    public ResponseEntity<?> changeStatus(@PathVariable UUID id, @RequestParam AppointmentStatus status){
+
+        String returnedMessage = appServe.changeStatus(id, status);
+
+        if(returnedMessage.equals("Appointment status updated successfully")){
+            return new ResponseEntity<>(returnedMessage, HttpStatus.OK);
+        }else if(returnedMessage.equals("The appointment with that id does not exist")){
+            return new ResponseEntity<>(returnedMessage, HttpStatus.NOT_FOUND);
+        }else{
+            return new ResponseEntity<>(returnedMessage, HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

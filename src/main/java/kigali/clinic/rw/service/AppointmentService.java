@@ -79,7 +79,6 @@ public class AppointmentService {
         Appointment appointment = existing.get();
         appointment.setAppointmentDate(newAppointment.getAppointmentDate());
         appointment.setReason(newAppointment.getReason());
-        appointment.setStatus(newAppointment.getStatus());
         appRepo.save(appointment);
         return "Appointment is updated successfully";
     }
@@ -121,4 +120,42 @@ public class AppointmentService {
         int deleted = appRepo.deleteByStatusBefore(AppointmentStatus.CANCELLED, date);
         return deleted + " appointments deleted";
     }
+
+    public String changeStatus(UUID id, AppointmentStatus newStatus){
+
+        Optional<Appointment> existing = appRepo.findById(id);
+        if(existing.isEmpty()){
+            return "The appointment with that id does not exist";
+        }
+
+        Appointment appointment = existing.get();
+        AppointmentStatus currentStatus = appointment.getStatus();
+
+        if(!isAllowedMove(currentStatus, newStatus)){
+            return "Cannot change status from " + currentStatus + " to " + newStatus;
+        }
+
+        appointment.setStatus(newStatus);
+        appRepo.save(appointment);
+        return "Appointment status updated successfully";
+    }
+
+
+    private boolean isAllowedMove(AppointmentStatus current, AppointmentStatus next){
+
+        if(current == AppointmentStatus.SCHEDULED){
+            if(next == AppointmentStatus.CONFIRMED || next == AppointmentStatus.CANCELLED){
+                return true;
+            }
+        }
+
+        if(current == AppointmentStatus.CONFIRMED){
+            if(next == AppointmentStatus.COMPLETED || next == AppointmentStatus.CANCELLED){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }
