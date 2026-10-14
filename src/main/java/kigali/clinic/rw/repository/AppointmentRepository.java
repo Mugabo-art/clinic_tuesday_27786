@@ -14,24 +14,30 @@ import kigali.clinic.rw.domain.Appointment;
 import kigali.clinic.rw.domain.AppointmentStatus;
 
 @Repository
-public interface AppointmentRepository extends JpaRepository<Appointment,UUID> {
+public interface AppointmentRepository extends JpaRepository<Appointment, UUID> {
 
-    List<Appointment> findByStatusOrderByAppointmentDateAsc(AppointmentStatus status);
+       List<Appointment> findByStatusOrderByAppointmentDateAsc(AppointmentStatus status);
 
-    List<Appointment> findByAppointmentDateBetweenOrderByAppointmentDateAsc(LocalDate start, LocalDate end);
+       List<Appointment> findByAppointmentDateBetweenOrderByAppointmentDateAsc(LocalDate start, LocalDate end);
 
-    boolean existsByDoctorIdAndAppointmentDateAndStatusNot(UUID doctorId, LocalDate appointmentDate, AppointmentStatus status);
+       List<Appointment> findByDoctorIdAndAppointmentDateAndStatusNot(UUID doctorId, LocalDate appointmentDate,
+                     AppointmentStatus status);
 
-    @Query("SELECT a.status, COUNT(a) FROM Appointment a " +
-           "GROUP BY a.status ORDER BY COUNT(a) DESC")
-    List<Object[]> countAppointmentsPerStatus();
+       boolean existsByDoctorIdAndAppointmentDateAndStatusNot(UUID doctorId, LocalDate appointmentDate,
+                     AppointmentStatus status);
 
-    @Modifying
-    @Query("UPDATE Appointment a SET a.status = :newStatus " +
-           "WHERE a.doctor.id = :doctorId AND a.appointmentDate = :date AND a.status <> :skippedStatus")
-    int cancelDay(@Param("doctorId") UUID doctorId, @Param("date") LocalDate date, @Param("newStatus") AppointmentStatus newStatus, @Param("skippedStatus") AppointmentStatus skippedStatus);
+       @Query("SELECT a.status, COUNT(a) FROM Appointment a " +
+                     "GROUP BY a.status ORDER BY COUNT(a) DESC")
+       List<Object[]> countAppointmentsPerStatus();
 
-    @Modifying
-    @Query("DELETE FROM Appointment a WHERE a.status = :status AND a.appointmentDate < :date")
-    int deleteByStatusBefore(@Param("status") AppointmentStatus status, @Param("date") LocalDate date);
+       @Modifying
+       @Query("UPDATE Appointment a SET a.status = :newStatus " +
+                     "WHERE a.doctor.id = :doctorId AND a.appointmentDate = :date AND a.status <> :skippedStatus")
+       int cancelDay(@Param("doctorId") UUID doctorId, @Param("date") LocalDate date,
+                     @Param("newStatus") AppointmentStatus newStatus,
+                     @Param("skippedStatus") AppointmentStatus skippedStatus);
+
+       @Modifying
+       @Query("DELETE FROM Appointment a WHERE a.status = :status AND a.appointmentDate < :date")
+       int deleteByStatusBefore(@Param("status") AppointmentStatus status, @Param("date") LocalDate date);
 }

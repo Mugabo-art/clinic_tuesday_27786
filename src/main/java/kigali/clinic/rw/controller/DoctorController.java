@@ -3,6 +3,11 @@ package kigali.clinic.rw.controller;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.time.LocalDate;
+
+import kigali.clinic.rw.domain.Appointment;
+import kigali.clinic.rw.service.AppointmentService;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +33,9 @@ public class DoctorController {
 
     @Autowired
     private DoctorService docServe;
+
+    @Autowired
+    private AppointmentService appServe;
 
 
     @PostMapping(value = "/save")
@@ -143,6 +151,16 @@ public class DoctorController {
         }
     }
 
+    @GetMapping(value = "/{doctorId}/agenda")
+    public ResponseEntity<?> getAgenda(@PathVariable UUID doctorId, @RequestParam String date){
+
+        if(docServe.getDoctorById(doctorId).isEmpty()){
+            return new ResponseEntity<>("The doctor with that id does not exist", HttpStatus.NOT_FOUND);
+        }
+
+        List<Appointment> appointments = appServe.getAgenda(doctorId, LocalDate.parse(date));
+        return new ResponseEntity<>(appointments, HttpStatus.OK);
+    }
 
 
 }

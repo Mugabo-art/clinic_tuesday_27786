@@ -155,7 +155,7 @@ public class AppointmentService {
         if(existing.isEmpty()){
             return "The appointment with that id does not exist";
         }
-
+        
         Appointment appointment = existing.get();
 
         if(appointment.getStatus() == AppointmentStatus.COMPLETED || appointment.getStatus() == AppointmentStatus.CANCELLED){
@@ -176,6 +176,10 @@ public class AppointmentService {
         appointment.setStatus(AppointmentStatus.SCHEDULED);
         appRepo.save(appointment);
         return "Appointment rescheduled successfully";
+    }
+
+    public List<Appointment> getAgenda(UUID doctorId, LocalDate date){
+        return appRepo.findByDoctorIdAndAppointmentDateAndStatusNot(doctorId, date, AppointmentStatus.CANCELLED);
     }
 
 
