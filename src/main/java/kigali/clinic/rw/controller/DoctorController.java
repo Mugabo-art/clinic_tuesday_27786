@@ -162,5 +162,11 @@ public class DoctorController {
         return new ResponseEntity<>(appointments, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/search")
+    public ResponseEntity<?> searchByName(@RequestParam String name){
+        List<Doctor> doctors = docServe.searchByName(name);
+        return new ResponseEntity<>(doctors, HttpStatus.OK);
+    }
+
 
 }

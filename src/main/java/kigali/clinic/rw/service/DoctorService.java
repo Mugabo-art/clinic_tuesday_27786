@@ -159,6 +159,10 @@ public class DoctorService {
         return "Office changed successfully";
     }
 
+    public List<Doctor> searchByName(String name){
+        return docRepo.searchByName(name);
+    }
+
     private String assignOffice(Doctor doctor, UUID officeId, UUID doctorId) {
 
         if (officeId == null) {
