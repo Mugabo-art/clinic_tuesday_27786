@@ -96,5 +96,11 @@ public class OfficeController {
             return new ResponseEntity<>("No appointments yet", HttpStatus.OK);
         }
     }
+    @GetMapping(value = "/free")
+    public ResponseEntity<?> getFreeOffices(){
+        List<Office> offices = offServe.getFreeOffices();
+        return new ResponseEntity<>(offices, HttpStatus.OK);
+    }
+
 
 }

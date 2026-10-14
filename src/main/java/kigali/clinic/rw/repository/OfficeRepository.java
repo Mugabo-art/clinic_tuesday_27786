@@ -26,4 +26,10 @@ public interface OfficeRepository extends JpaRepository<Office,UUID> {
            "GROUP BY o.name, o.officeNumber " +
            "ORDER BY COUNT(a) DESC")
     List<Object[]> countAppointmentsPerOffice();
+
+    @Query("SELECT o FROM Office o WHERE NOT EXISTS " +
+           "(SELECT d FROM Doctor d WHERE d.office = o) " +
+           "ORDER BY o.officeNumber ASC")
+    List<Office> findFreeOffices();
+
 }

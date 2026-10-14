@@ -79,4 +79,9 @@ public class OfficeService {
     public List<Object[]> getBusiestOffice(){
         return offRepo.countAppointmentsPerOffice();
     }
+
+    public List<Office> getFreeOffices(){
+        return offRepo.findFreeOffices();
+    }
+
 }
