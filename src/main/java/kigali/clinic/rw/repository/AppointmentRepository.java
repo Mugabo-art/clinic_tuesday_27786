@@ -48,5 +48,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, UUID> 
 
        long countByStatus(AppointmentStatus status);
 
+      
+
 }
 

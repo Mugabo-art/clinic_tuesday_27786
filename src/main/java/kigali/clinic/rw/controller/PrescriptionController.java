@@ -94,5 +94,11 @@ public class PrescriptionController {
         }
     }
 
+    @GetMapping(value = "/stats/top-medicines")
+    public ResponseEntity<?> getTopMedicines(){
+        List<Object[]> rows = presServe.getTopMedicines();
+        return new ResponseEntity<>(rows, HttpStatus.OK);
+    }
+
 
 }

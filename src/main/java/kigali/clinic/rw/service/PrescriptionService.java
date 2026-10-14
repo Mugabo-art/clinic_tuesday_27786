@@ -74,4 +74,9 @@ public class PrescriptionService {
         return "Prescription deleted successfully";
     }
 
+    public List<Object[]> getTopMedicines(){
+        return presRepo.countPerMedicine();
+    }
+
+
 }

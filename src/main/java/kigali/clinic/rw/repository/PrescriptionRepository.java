@@ -24,4 +24,8 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, UUID
 
     boolean existsByAppointmentId(UUID appointmentId);
 
+    @Query("SELECT p.medicineName, COUNT(p) FROM Prescription p " +
+            "GROUP BY p.medicineName " +
+            "ORDER BY COUNT(p) DESC")
+    List<Object[]> countPerMedicine();
 }
